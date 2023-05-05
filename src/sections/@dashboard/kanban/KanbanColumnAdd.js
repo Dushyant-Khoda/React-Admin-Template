@@ -65,7 +65,7 @@ export default function KanbanColumnAdd() {
           color="inherit"
           variant="outlined"
           startIcon={<Iconify icon={'eva:plus-fill'} width={20} height={20} />}
-          onClick={handleOpen}
+          onClick={() => handleOpen()}
         >
           Add section
         </Button>

@@ -75,9 +75,17 @@ const slice = createSlice({
 
     addTask(state, action) {
       const { card, columnId } = action.payload;
+      console.log("🚀 ~ file: kanban.js:78 ~ addTask ~ card, columnId:", card, columnId);
 
-      state.board.cards[card.id] = card;
-      state.board.columns[columnId].cardIds.push(card.id);
+      if (state?.board?.cards) {
+        console.log("🚀 ~ file: kanban.js:81 ~ addTask ~ state?.board?.cards:", state?.board?.cards);
+        // debugger;
+        state?.board?.cards[card?.id] = card;
+        state.board.columns[columnId].cardIds.push(card.id);
+      } else { 
+        state?.board?.cards[card?.id] = card;
+        state?.board?.columns[columnId]?.cardIds?.push(card?.id);
+      }
     },
 
     deleteTask(state, action) {

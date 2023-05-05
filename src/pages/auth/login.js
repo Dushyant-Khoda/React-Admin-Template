@@ -44,7 +44,7 @@ const HeaderStyle = styled('header')(({ theme }) => ({
 
 const SectionStyle = styled(Card)(({ theme }) => ({
   width: '100%',
-  maxWidth: 464,
+  maxWidth: 700,
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -91,10 +91,7 @@ export default function Login() {
               <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
                 Hi, Welcome Back
               </Typography>
-              <Image
-                src="https://minimal-assets-api.vercel.app/assets/illustrations/illustration_login.png"
-                alt="login"
-              />
+              <Image src="https://minimals.cc/assets/illustrations/illustration_dashboard.png" alt="login" />
             </SectionStyle>
           )}
 
@@ -108,7 +105,7 @@ export default function Login() {
                   <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
                 </Box>
 
-                <Tooltip title={capitalCase(method)} placement="right">
+                {/*  <Tooltip title={capitalCase(method)} placement="right">
                   <>
                     <Image
                       disabledEffect
@@ -117,7 +114,7 @@ export default function Login() {
                       sx={{ width: 32, height: 32 }}
                     />
                   </>
-                </Tooltip>
+                </Tooltip> */}
               </Stack>
 
               <Alert severity="info" sx={{ mb: 3 }}>

@@ -25,6 +25,7 @@ KanbanTaskAdd.propTypes = {
 };
 
 export default function KanbanTaskAdd({ onAddTask, onCloseAddTask }) {
+  // debugger;
   const [name, setName] = useState('');
   const [completed, setCompleted] = useState(false);
   const {
@@ -43,6 +44,7 @@ export default function KanbanTaskAdd({ onAddTask, onCloseAddTask }) {
 
   const handleKeyUpAddTask = (event) => {
     if (event.key === 'Enter') {
+      // // debugger;
       if (name.trim() !== '') {
         onAddTask({ ...defaultTask, id: uuidv4(), name, due: dueDate, completed });
       }
@@ -62,7 +64,7 @@ export default function KanbanTaskAdd({ onAddTask, onCloseAddTask }) {
 
   return (
     <>
-      <ClickAwayListener onClickAway={handleClickAddTask}>
+      <ClickAwayListener onClickAway={() => handleClickAddTask()}>
         <Paper variant="outlined" sx={{ p: 2 }}>
           <OutlinedInput
             multiline
@@ -82,7 +84,7 @@ export default function KanbanTaskAdd({ onAddTask, onCloseAddTask }) {
               <Checkbox
                 disableRipple
                 checked={completed}
-                onChange={handleChangeCompleted}
+                onChange={(e) => handleChangeCompleted(e)}
                 icon={<Iconify icon={'eva:radio-button-off-outline'} />}
                 checkedIcon={<Iconify icon={'eva:checkmark-circle-2-outline'} />}
               />
@@ -101,24 +103,26 @@ export default function KanbanTaskAdd({ onAddTask, onCloseAddTask }) {
                   endTime={endTime}
                   isSameDays={isSameDays}
                   isSameMonths={isSameMonths}
-                  onOpenPicker={onOpenPicker}
+                  onOpenPicker={() => onOpenPicker()}
                 />
               ) : (
                 <Tooltip title="Add due date">
-                  <IconButton size="small" onClick={onOpenPicker}>
+                  <IconButton size="small" onClick={() => onOpenPicker()}>
                     <Iconify icon={'eva:calendar-fill'} width={20} height={20} />
                   </IconButton>
                 </Tooltip>
               )}
-
+              {/* 
               <MobileDateRangePicker
                 open={openPicker}
-                onClose={onClosePicker}
-                onOpen={onOpenPicker}
+                onClose={() => onClosePicker()}
+                onOpen={() => onOpenPicker()}
                 value={dueDate}
-                onChange={onChangeDueDate}
-                renderInput={() => {}}
-              />
+                onChange={() => onChangeDueDate()}
+                renderInput={() => {
+                  return <div>Task Added</div>;
+                }}
+              /> */}
             </Stack>
           </Stack>
         </Paper>
@@ -187,7 +191,7 @@ export function DisplayTime({ startTime, endTime, isSameDays, isSameMonths, onOp
 
   if (isSameMonths) {
     return (
-      <Box onClick={onOpenPicker} sx={{ ...style, ...sx }}>
+      <Box onClick={() => onOpenPicker()} sx={{ ...style, ...sx }}>
         {isSameDays
           ? format(new Date(endTime), 'dd MMM')
           : `${format(new Date(startTime), 'dd')} - ${format(new Date(endTime), 'dd MMM')}`}
@@ -195,7 +199,7 @@ export function DisplayTime({ startTime, endTime, isSameDays, isSameMonths, onOp
     );
   }
   return (
-    <Box onClick={onOpenPicker} sx={{ ...style, ...sx }}>
+    <Box onClick={() => onOpenPicker()} sx={{ ...style, ...sx }}>
       {format(new Date(startTime), 'dd MMM')} - {format(new Date(endTime), 'dd MMM')}
     </Box>
   );

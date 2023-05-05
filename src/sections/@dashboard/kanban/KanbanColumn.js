@@ -26,7 +26,7 @@ export default function KanbanColumn({ column, index }) {
   const dispatch = useDispatch();
 
   const { enqueueSnackbar } = useSnackbar();
-
+  // debugger;
   const { board } = useSelector((state) => state.kanban);
 
   const [open, setOpen] = useState(false);
@@ -34,6 +34,7 @@ export default function KanbanColumn({ column, index }) {
   const { name, cardIds, id } = column;
 
   const handleOpenAddTask = () => {
+    // debugger;
     setOpen((prev) => !prev);
   };
 
@@ -98,14 +99,17 @@ export default function KanbanColumn({ column, index }) {
             </Droppable>
 
             <Stack spacing={2} sx={{ pb: 3 }}>
-              {open && <KanbanAddTask onAddTask={handleAddTask} onCloseAddTask={handleCloseAddTask} />}
+              {open && <KanbanAddTask onAddTask={() => handleAddTask()} onCloseAddTask={() => handleCloseAddTask()} />}
 
               <Button
                 fullWidth
                 size="large"
                 color="inherit"
                 startIcon={<Iconify icon={'eva:plus-fill'} width={20} height={20} />}
-                onClick={handleOpenAddTask}
+                onClick={() => {
+                  // debugger;
+                  handleOpenAddTask();
+                }}
                 sx={{ fontSize: 14 }}
               >
                 Add Task

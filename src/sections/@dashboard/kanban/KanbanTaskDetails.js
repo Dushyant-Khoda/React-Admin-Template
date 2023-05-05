@@ -51,7 +51,7 @@ KanbanTaskDetails.propTypes = {
 
 export default function KanbanTaskDetails({ card, isOpen, onClose, onDeleteTask }) {
   const isDesktop = useResponsive('up', 'sm');
-
+  // debugger;
   const fileInputRef = useRef(null);
 
   const [taskCompleted, setTaskCompleted] = useState(card.completed);
@@ -105,7 +105,7 @@ export default function KanbanTaskDetails({ card, isOpen, onClose, onDeleteTask 
             variant="outlined"
             color={taskCompleted ? 'primary' : 'inherit'}
             startIcon={taskCompleted && <Iconify icon={'eva:checkmark-fill'} width={16} height={16} />}
-            onClick={handleToggleCompleted}
+            onClick={() => handleToggleCompleted()}
           >
             {taskCompleted ? 'Complete' : 'Mark as complete'}
           </Button>
@@ -127,7 +127,7 @@ export default function KanbanTaskDetails({ card, isOpen, onClose, onDeleteTask 
             </>
 
             <Tooltip title="Delete task">
-              <IconButtonAnimate onClick={onDeleteTask} size="small">
+              <IconButtonAnimate onClick={() => onDeleteTask()} size="small">
                 <Iconify icon={'eva:trash-2-outline'} width={20} height={20} />
               </IconButtonAnimate>
             </Tooltip>
@@ -196,14 +196,14 @@ export default function KanbanTaskDetails({ card, isOpen, onClose, onDeleteTask 
                   </Tooltip>
                 )}
 
-                <MobileDateRangePicker
+                {/* <MobileDateRangePicker
                   open={openPicker}
                   onClose={onClosePicker}
                   onOpen={onOpenPicker}
                   value={dueDate}
                   onChange={onChangeDueDate}
                   renderInput={() => {}}
-                />
+                /> */}
               </>
             </Stack>
 
@@ -214,7 +214,7 @@ export default function KanbanTaskDetails({ card, isOpen, onClose, onDeleteTask 
                 select
                 size="small"
                 value={prioritize}
-                onChange={handleChangePrioritize}
+                onChange={() => handleChangePrioritize()}
                 sx={{
                   '& svg': { display: 'none' },
                   '& fieldset': { display: 'none' },
